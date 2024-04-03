@@ -5,20 +5,20 @@ import TodoList from "./TodoList";
 
 const App = () => {
   const [todo, setTodo] = useState([
-    { task: 'reading', state: false },
-    { task: 'writing', state: false },
-    { task: 'speaking', state: false }
+    { id: 1, task: 'Reading', state: false },
+    { id: 2, task: 'Writing', state: false },
+    { id: 3, task: 'Speaking', state: false }
   ]);
   
-  function handleComplete(index) {
-    const updatedTodo = [...todo];
-    updatedTodo[index].state = true;
-    setTodo(updatedTodo);
+  function handleComplete(id) {
+    setTodo(todo.map(item =>
+      item.id === id ? { ...item, state: true } : item
+    ));
   }
 
   return (
     <div>
-      <h2>Parent Component</h2>
+      <h2>Parent Compponent</h2>
       <TodoList todo={todo} handleComplete={handleComplete} />
     </div>
   );
