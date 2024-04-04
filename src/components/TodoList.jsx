@@ -15,6 +15,13 @@ export default function TodoList(props) {
             )}
           </li>
         ))}
+        {
+          props.completed.map(
+            item => (
+              <li key={item.id}> {item.task} </li>
+            )
+          )
+        }
       </ul>
     </div>
   );

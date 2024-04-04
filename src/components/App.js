@@ -9,17 +9,24 @@ const App = () => {
     { id: 2, task: 'Build a React App', state: false },
     { id: 3, task: 'Deploy the React App', state: false }
   ]);
+
+  const[completed, setCompleted] = useState([]);
   
   function handleComplete(id) {
-    setTodo(todos.map(item =>
-      item.id === id ? { ...item, state: true } : item
-    ));
+
+    const todoCompleted = todos.find(todo => todo.id === id);
+
+    if(todoCompleted){
+      todoCompleted.state = true;
+      setCompleted([...completed, todoCompleted]);
+      setTodo(todos.filter(todo => todo.id !== id));
+    }
   }
 
   return (
     <div>
       <h2>Parent Compponent</h2>
-      <TodoList todos={todos} handleComplete={handleComplete} />
+      <TodoList todos={todos} completed = {completed} handleComplete={handleComplete} />
     </div>
   );
 }
